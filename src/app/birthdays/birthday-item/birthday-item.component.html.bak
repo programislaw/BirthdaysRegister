@@ -1,0 +1,15 @@
+
+<div style="cursor: pointer;" 
+[routerLink]="[id]" 
+routerLinkActive="active"
+class="list-group-item" > 
+    <div>
+        <h5 class="list-group-item-heading">{{birthday.firstname}} {{birthday.lastname}} {{id}}</h5>
+        <p class="list-group-item-text"> {{birthday.date | date:'yyyy-MM-dd' }}</p>
+    </div>
+    <div>
+        <button type="button" class="btn btn-outline-warning btn-sm" (click)="onEdit(id)">Edit</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" (click)="onDelete()">Delete</button>
+        <button type="button" class="btn btn-outline-info btn-sm" (click)="onView(id)">View</button>
+    </div>
+</div>

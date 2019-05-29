@@ -1,0 +1,45 @@
+<br>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="birthdayForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-sm-4 form-group">
+          <label for="firstname">First Name</label>
+          <input type="text" id="firstname" class="form-control" formControlName="firstname"
+          placeholder="First Name" [readonly]="isView">
+        </div>
+        <div class="col-sm-4 form-group">
+          <label for="lastname">Last Name</label>
+          <input type="text" class="form-control" id="lastname" name="lastname" formControlName="lastname"
+          placeholder="Last Name" [readonly]="isView"
+          >
+        </div>
+        <div class="col-sm-4 form-group" *ngIf="isView; else elseBlock">
+            <mat-form-field> 
+              <input matInput [matDatepicker]="picker" class="form-control" id="date" name="date" 
+                    formControlName="date" placeholder="Date" [readonly]="isView" disabled>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <ng-template #elseBlock>
+          <div class="col-sm-4 form-group">
+            <mat-form-field> 
+              <input matInput [matDatepicker]="picker" class="form-control" id="date" name="date" 
+                formControlName="date" placeholder="Date" [readonly]="isView">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+          </div>
+        </ng-template>
+      </div>
+      <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-outline-success" *ngIf="isNew" >Add</button>
+            <button type="submit" class="btn btn-outline-success" *ngIf="isEdit" >Edit</button>
+            <button type="submit" class="btn btn-outline-success" *ngIf="isView" >Close</button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
