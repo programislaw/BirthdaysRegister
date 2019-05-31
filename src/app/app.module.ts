@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
-import { BirthdayEditComponent } from './birthday-edit/birthday-edit.component';
+import { BirthdayEditComponent } from './birthdays/birthday-edit/birthday-edit.component';
 import { BirthdayItemComponent } from './birthdays/birthday-item/birthday-item.component';
 import { BirthdayService } from './services/birthday.service';
 import { MatNativeDateModule, MatDatepickerModule, MatFormFieldModule } from '@angular/material';
 import { MatInputModule, MatButtonModule, MatCheckboxModule } from '@angular/material';
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { BirthdaysListComponent } from './birthdays/birthdays-list/birthdays-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     BirthdaysComponent,
     BirthdayEditComponent,
     BirthdayItemComponent,
-    NavbarComponent
+    NavbarComponent,
+    BreadcrumbComponent,
+    BirthdaysListComponent
   ],
   imports: [
     BrowserModule,

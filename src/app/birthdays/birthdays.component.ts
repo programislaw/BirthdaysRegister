@@ -11,31 +11,10 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
   styleUrls: ['./birthdays.component.css']
 })
 export class BirthdaysComponent implements OnInit {
-  birthdays: Birthday [];
 
-  private subscription: Subscription;
-
-  constructor(private birthdayService: BirthdayService, private route: ActivatedRoute, private router: Router ) { }
-
-  ngOnInit() {
-    this.birthdays = this.birthdayService.getBirthdays();
-    this.subscription = this.birthdayService.birthdaysChanges.subscribe(
-      (birthdays: Birthday []) => {
-        this.birthdays = birthdays;
-      }
-    );
+  ngOnInit(): void {
   }
 
-  onNew() {
-    this.router.navigate(['new'], {relativeTo: this.route});
-  }
+  constructor() { }
 
-  onSelectRow() {
-    console.log("onSelectRow");
-  }
-
-  deleteItem(id: number) {
-    this.birthdayService.deleteBirthday(id);
-    this.birthdays = this.birthdayService.getBirthdays();
-  }
 }
