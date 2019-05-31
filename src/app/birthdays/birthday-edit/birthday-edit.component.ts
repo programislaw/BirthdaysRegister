@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BirthdayService } from '../services/birthday.service';
+import { BirthdayService } from '../../services/birthday.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Birthday } from '../model/birthday.model';
+import { Birthday } from '../../model/birthday.model';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NoopAnimationStyleNormalizer } from '@angular/animations/browser/src/dsl/style_normalization/animation_style_normalizer';
@@ -20,6 +20,9 @@ export class BirthdayEditComponent implements OnInit {
   isView: boolean;
   isNew: boolean;
   birthdayForm: FormGroup;
+  firstnameCtr: FormControl;
+  lastnameCtr: FormControl;
+  dateCtr: FormControl;
   subscription: Subscription;
 
   ngOnInit() {
@@ -37,21 +40,25 @@ export class BirthdayEditComponent implements OnInit {
   initForm() {
     if (this.isEdit || this.isView) {
       const birthday = this.birthdayService.getBirthday(this.id);
-      this.birthdayForm = new FormGroup({
-        'firstname': new FormControl(birthday.firstname, Validators.required),
-        'lastname': new FormControl(birthday.lastname, Validators.required),
-        'date': new FormControl(birthday.date, Validators.required)
-      });
+      this.initControls(birthday.firstname, birthday.lastname, birthday.date);
     } else {
-      this.birthdayForm = new FormGroup({
-        'firstname': new FormControl('', Validators.required),
-        'lastname': new FormControl('', Validators.required),
-        'date': new FormControl('', Validators.required)
-      });
+      this.initControls('', '', null);
     }
+    this.birthdayForm = new FormGroup({
+      'firstname': this.firstnameCtr,
+      'lastname': this.lastnameCtr,
+      'date': this.dateCtr
+    });
   }
 
-  onSubmit() {
+  private initControls(firstname: String, lastname: String, date: Date) {
+    this.firstnameCtr = new FormControl(firstname, [Validators.required, Validators.minLength(3)]);
+    this.lastnameCtr = new FormControl(lastname, [Validators.required, Validators.minLength(3)]);
+    this.dateCtr = new FormControl(date, Validators.required);
+  }
+
+  onSave() {
+    if (!this.birthdayForm.invalid) {
     const birthday = new Birthday(
       this.birthdayForm.value['date'],
       this.birthdayForm.value['firstname'],
@@ -61,8 +68,12 @@ export class BirthdayEditComponent implements OnInit {
       this.birthdayService.addBirthday(birthday);
     } else if (this.isEdit) {
       this.birthdayService.editBirthday(this.id, birthday);
-    } else {
     }
+    this.navigateBack();
+    }
+  }
+
+  onClose() {
     this.navigateBack();
   }
 

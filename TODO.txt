@@ -1,11 +1,25 @@
 + Implement View Birthday page
-- Fix bredcrumps
++ Fix bredcrumps
 - Fix navbar
 - Implement backend
-- add validations
++ add validations
 + inspect code to find workaround, bugs, bad practics 
 + fix delete 
 
 
 
 - Whats the different between ng serve ad npm start
+
+
+"00808081-1d61-bac4-011d-61f06c330634"
+
+
+const appRoutes: Routes = [
+  { path: '', redirectTo: '/birthdays', pathMatch: 'full'},
+  { path: 'birthdays', component: BirthdaysComponent, data: { breadcrumb: 'Birthdays'}, children: [
+    { path: 'new', component: BirthdayEditComponent, data: { breadcrumb: 'New'}},
+    { path: ':id/:mode', component: BirthdayEditComponent, data: { breadcrumb: 'View'}}
+    // { path: 'birthdays/:id/:mode', component: BirthdayEditComponent}
+    ]
+  }
+];

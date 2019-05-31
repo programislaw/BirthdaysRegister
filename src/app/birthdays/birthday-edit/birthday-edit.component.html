@@ -6,13 +6,30 @@
         <div class="col-sm-4 form-group">
           <label for="firstname">First Name</label>
           <input type="text" id="firstname" class="form-control" formControlName="firstname"
+          required minlength="3"
           placeholder="First Name" [readonly]="isView">
+          <div *ngIf="firstnameCtr.invalid && (firstnameCtr.dirty || firstnameCtr.touched)" class="alert alert-danger">
+            <div *ngIf="firstnameCtr.errors.required">
+              First name is required.
+            </div>
+            <div *ngIf="firstnameCtr.errors.minlength">
+                First name must be at least 3 characters long.
+            </div>
+          </div>
         </div>
         <div class="col-sm-4 form-group">
           <label for="lastname">Last Name</label>
           <input type="text" class="form-control" id="lastname" name="lastname" formControlName="lastname"
-          placeholder="Last Name" [readonly]="isView"
-          >
+          required minlength="3"
+          placeholder="Last Name" [readonly]="isView">
+          <div *ngIf="lastnameCtr.invalid && (lastnameCtr.dirty || lastnameCtr.touched)" class="alert alert-danger">
+              <div *ngIf="lastnameCtr.errors.required">
+                Last name is required.
+              </div>
+              <div *ngIf="lastnameCtr.errors.minlength">
+                  Last name must be at least 3 characters long.
+              </div>
+          </div>
         </div>
         <div class="col-sm-4 form-group" *ngIf="isView; else elseBlock">
             <mat-form-field> 
@@ -26,18 +43,23 @@
           <div class="col-sm-4 form-group">
             <mat-form-field> 
               <input matInput [matDatepicker]="picker" class="form-control" id="date" name="date" 
+                required
                 formControlName="date" placeholder="Date" [readonly]="isView">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
+              <div *ngIf="dateCtr.invalid && (dateCtr.dirty || dateCtr.touched)" class="alert alert-danger">
+                  <div *ngIf="dateCtr.errors.required">
+                    Birthday date is required.
+                  </div>
+              </div>
           </div>
         </ng-template>
       </div>
       <div class="row">
           <div class="col-xs-12">
-            <button type="submit" class="btn btn-outline-success" *ngIf="isNew" >Add</button>
-            <button type="submit" class="btn btn-outline-success" *ngIf="isEdit" >Edit</button>
-            <button type="submit" class="btn btn-outline-success" *ngIf="isView" >Close</button>
+            <button class="btn btn-outline-success btn-sm"  (click)='onSave()' [disabled]="birthdayForm.invalid" *ngIf="isNew || isEdit">Save</button>
+            <button class="btn btn-outline-danger btn-sm" (click)='onClose()' >Close</button>
           </div>
         </div>
     </form>
