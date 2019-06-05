@@ -1,17 +1,31 @@
 import { Birthday } from '../model/birthday.model';
-import { BirthdaysComponent } from '../birthdays/birthdays.component';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { tap, catchError } from 'rxjs/operators';
 
+@Injectable()
 export class BirthdayService {
-    private birthdays: Birthday [];
-
+    apiURL: string = '/birthdays';
+    private birthdays: Birthday [] = new Array<Birthday>();
+    public firstPage: String = '';
+    public prevPage: String = '';
+    public nextPage: String = '';
+    public lastPage: String = '';
     birthdaysChanges = new Subject<Birthday[]>();
 
+    constructor(private httpClient: HttpClient ) {
+        this.loadBirthdays();
+    }
 
-    constructor() {
-        this.birthdays = new Array<Birthday>();
-        this.birthdays.push(new Birthday( new Date('1980-02-21'), 'Sławomir', 'Bąk'));
-        this.birthdays.push(new Birthday( new Date('1983-10-10'), 'Katarzyna', 'Bąk'));
+    loadBirthdays() {
+        console.log('getBirthdays');
+        this.httpClient.get<Birthday[]>(this.apiURL).subscribe(birthdays => {
+            console.log(birthdays);
+            birthdays.forEach( birthday => {
+                this.birthdays.push(birthday);
+            });
+        });
     }
 
     getBirthdays() {

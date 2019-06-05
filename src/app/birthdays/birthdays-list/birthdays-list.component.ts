@@ -29,6 +29,10 @@ export class BirthdaysListComponent implements OnInit {
     this.router.navigate(['new'], {relativeTo: this.route});
   }
 
+  onHttp() {
+    this.birthdayService.getBirthdays();
+  }
+
   onSelectRow() {
     console.log('onSelectRow');
   }

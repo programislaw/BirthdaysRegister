@@ -5,8 +5,8 @@ import { BirthdayEditComponent } from './birthdays/birthday-edit/birthday-edit.c
 import { BirthdaysListComponent } from './birthdays/birthdays-list/birthdays-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'birthdays', pathMatch: 'full'},
-  { path: 'birthdays', component: BirthdaysComponent, data: { breadcrumb: 'Birthdays'}, children: [
+  { path: '', redirectTo: 'birthdays-register', pathMatch: 'full'},
+  { path: 'birthdays-register', component: BirthdaysComponent, data: { breadcrumb: 'Birthdays'}, children: [
     { path: '', component: BirthdaysListComponent, data: { breadcrumb: 'List'}},
     { path: 'new', component: BirthdayEditComponent, data: { breadcrumb: 'New'}},
     { path: ':id/:mode', component: BirthdayEditComponent, data: { breadcrumb: 'View/Edit'}}

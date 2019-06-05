@@ -4,7 +4,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Birthday } from '../../model/birthday.model';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { NoopAnimationStyleNormalizer } from '@angular/animations/browser/src/dsl/style_normalization/animation_style_normalizer';
 
 @Component({
   selector: 'app-birthday-edit',
@@ -78,6 +77,6 @@ export class BirthdayEditComponent implements OnInit {
   }
 
   private navigateBack() {
-    this.router.navigate(['/birthdays'], { relativeTo: this.route });
+    this.router.navigate(['/birthdays-register'], { relativeTo: this.route });
   }
 }

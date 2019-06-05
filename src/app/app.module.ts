@@ -15,6 +15,7 @@ import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BirthdaysListComponent } from './birthdays/birthdays-list/birthdays-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BirthdaysListComponent } from './birthdays/birthdays-list/birthdays-lis
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule
   ],
   providers: [BirthdayService],
   bootstrap: [AppComponent]
